@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,21 @@ Route::middleware(['auth:sanctum', 'verified'])
             'edit' => 'editProduct',
             'update' => 'updateProduct',
             'destroy' => 'deleteProduct'
+        ]
+    ])
+    ->except([
+        'show'
+    ]);
+
+Route::middleware(['auth:sanctum', 'verified'])
+    ->resource('categories', CategoryController::class, [
+        'names' => [
+            'index' => 'categories',
+            'create' => 'createCategory',
+            'store' => 'storeCategory',
+            'edit' => 'editCategory',
+            'update' => 'updateCategory',
+            'destroy' => 'deleteCategory'
         ]
     ])
     ->except([

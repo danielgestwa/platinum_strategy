@@ -51,29 +51,51 @@
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
-                                        <label for="type" class="block text-sm font-medium text-gray-700">Type</label>
-                                        <input 
-                                            type="text" id="type" 
-                                            value="{{ $productValue->type ?? '' }}" 
-                                            name="type" 
-                                            placeholder="e.g. Food & Drinks"
-                                            class="@error('type') is-invalid @enderror mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                                        
-                                        @error('type')
-                                            <div class="alert error_text">{{ $message }}</div>
-                                        @enderror
+                                        <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+
+                                        <select 
+                                            id="category_id" 
+                                            name="category_id" 
+                                            autocomplete="category_id" 
+                                            class="@error('category_id') is-invalid @enderror mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            @foreach ($categories as $category)
+                                                <option 
+                                                    value="{{ $category->id }}"
+                                                    @if(isset($productValue->category_id) && $productValue->category_id === $category->id)
+                                                        {{ 'selected' }}
+                                                    @endif > 
+                                                    {{ $category->name }} 
+                                                </option>
+                                            @endforeach
+                                        </select>
+
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
                                         <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
                                         <input 
-                                            type="text" id="price" 
+                                            type="number" id="price" 
                                             value="{{ $productValue->price ?? '' }}" 
                                             name="price" 
-                                            placeholder="e.g. 10"
+                                            step="any"
+                                            placeholder="e.g. 2.99"
                                             class="@error('price') is-invalid @enderror mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                         
                                         @error('price')
+                                            <div class="alert error_text">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-span-6 md:col-span-3">
+                                        <label for="bought_at" class="block text-sm font-medium text-gray-700">Bought At</label>
+                                        <input 
+                                            type="text" id="bought_at" 
+                                            value="{{ $productValue->bought_at ?? date('Y-m-d') }}" 
+                                            name="bought_at" 
+                                            placeholder="e.g. 10"
+                                            class="@error('bought_at') is-invalid @enderror mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                        
+                                        @error('bought_at')
                                             <div class="alert error_text">{{ $message }}</div>
                                         @enderror
                                     </div>

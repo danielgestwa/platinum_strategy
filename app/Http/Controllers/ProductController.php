@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -11,7 +12,7 @@ class ProductController extends Controller
     {
         return view(
             'product.index', 
-            ['products' => Product::orderBy('created_at', 'desc')->get()]
+            ['products' => Product::orderBy('bought_at', 'desc')->get()]
         );
     }
 
@@ -22,7 +23,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.create');
+        return view('product.create', ['categories' => Category::all()]);
     }
 
     /**
@@ -35,9 +36,10 @@ class ProductController extends Controller
     {
         $productData = $request->validate([
             'name' => 'required',
-            'type' => 'required',
+            'category_id' => 'required',
             'price' => 'required|numeric',
-            'comment' => 'max:1024'
+            'comment' => 'max:255',
+            'bought_at' => 'required|date'
         ]);
 
         $product = Product::create($productData);
@@ -69,7 +71,13 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::where('id', $id)->firstOrFail();
-        return view('product.create', ['productValue' => $product]);
+        return view(
+            'product.create', 
+            [
+                'productValue' => $product,
+                'categories' => Category::all()
+            ]
+        );
     }
 
     /**
@@ -83,9 +91,10 @@ class ProductController extends Controller
     {
         $productData = $request->validate([
             'name' => 'required',
-            'type' => 'required',
+            'category_id' => 'required',
             'price' => 'required|numeric',
-            'comment' => 'max:1024'
+            'comment' => 'max:255',
+            'bought_at' => 'required|date'
         ]);
         $product = Product::findOrFail($id);
         $product->update($productData);

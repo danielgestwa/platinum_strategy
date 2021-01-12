@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Products list
+            Categories list
         </h2>
     </x-slot>
 
@@ -9,7 +9,7 @@
         <div class="max-w-12xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-12">
                 <div class="py-4">
-                    <a href="{{ route('createProduct') }}" class="btn btn-add">Create new product</a>
+                    <a href="{{ route('createCategory') }}" class="btn btn-add">Create new category</a>
                 </div>
                 <div class="wait text-center">
                     <p>Loading data, please wait...</p>
@@ -19,23 +19,15 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Category</th>
-                                <th>Price</th>
-                                <th>Bought At</th>
-                                <th>Comment</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($products as $product)
+                            @foreach ($categories as $category)
                             <tr>
-                                <td>{{ $product->name }}</td>
-                                <td> {{ $product->category->name }} </td>
-                                <td>{{ $product->price }}</td>
-                                <td>{{ $product->bought_at }}</td>
-                                <td>{{ $product->comment }}</td>
+                                <td>{{ $category->name }}</td>
                                 <td>
-                                    <a href=" {{ route('editProduct', ['product' => $product->id]) }} " role="button">
+                                    <a href=" {{ route('editCategory', ['category' => $category->id]) }} " role="button">
                                         Edit
                                     </a>
                                 </td>
