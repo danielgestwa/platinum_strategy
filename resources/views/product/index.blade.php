@@ -11,8 +11,11 @@
                 <div class="py-4">
                     <a href="{{ route('createProduct') }}" class="btn btn-add">Create new product</a>
                 </div>
-                <div class="text-md">
-                    <table>
+                <div class="wait text-center">
+                    <p>Loading data, please wait...</p>
+                </div>
+                <div class="hide">
+                    <table id="data_table" class="display barcode">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -20,6 +23,7 @@
                                 <th>Price</th>
                                 <th>Comment</th>
                                 <th>Created</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>

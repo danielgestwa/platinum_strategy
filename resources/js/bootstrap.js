@@ -26,3 +26,12 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+import $ from 'jquery';
+window.jQuery = $;
+window.$ = $;
+
+/*Datatables*/
+import dt from 'datatables.net';
+import 'datatables.net-responsive/js/dataTables.responsive.js';
+import 'datatables.net-dt/css/jquery.dataTables.css';

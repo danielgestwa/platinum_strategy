@@ -1,0 +1,103 @@
+body {
+    table-layout: fixed;
+}
+
+.btn {
+    padding: 8px;
+    border-radius: 5px;
+    color: white;
+    display: inline-block;
+}
+
+.btn-small {
+    width: 48px;
+    height: 48px;
+}
+
+.btn-image {
+    width: 24px;
+    height: 100%;
+    margin: auto;
+}
+
+.btn-add {
+    background-color: #2BBBAD;
+}
+
+.btn-edit {
+    background-color: #33B5E5;
+}
+
+.btn-delete {
+    background-color: #ff4444;
+}
+
+.hide {
+    display: none;
+}
+
+.error_text {
+    color: #ff4444;
+    font-weight: bold;
+}
+
+.reset-full-width {
+    width: 100%; 
+    height: 100%; 
+    margin: 0px; 
+    padding: 0px;
+}
+
+.delete_table_row {
+    display: none;
+}
+
+.logo {
+    max-width: 100px;
+}
+
+#data_table {
+    width: 100%;
+    text-align: center;
+}
+
+.dtr-title {
+    font-weight: bold;
+}
+
+.dtr-title:after {
+    content: ": ";
+}
+
+table.collapsed tbody tr td:first-child:not(.child) {
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+table.collapsed tbody .btn-image {
+    display: none;
+}
+
+table.collapsed tbody .btn-edit {
+    height: 25px;
+    width: 40px;
+    padding: 2px;
+}
+
+table.collapsed tbody .btn-edit:before {
+    content: "Edit";
+    text-align: center;
+}
+
+#data_table_length select {
+    min-width: 70px;
+}
+
+@media screen and (max-width: 600px) {
+    .btn-add {
+        width: 100%;
+        min-width: 100px;
+        text-align: center;
+    }
+}
