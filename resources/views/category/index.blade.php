@@ -9,13 +9,13 @@
         <div class="max-w-12xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-12">
                 <div class="py-4">
-                    <a href="{{ route('createCategory') }}" class="btn btn-add">Create new category</a>
+                    <a href="{{ route('createCategory') }}" class="btn btn-add">Create new Category</a>
                 </div>
                 <div class="wait text-center">
                     <p>Loading data, please wait...</p>
                 </div>
                 <div class="hide">
-                    <table id="data_table" class="display barcode">
+                    <table id="data_table" class="display">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -27,8 +27,8 @@
                             <tr>
                                 <td>{{ $category->name }}</td>
                                 <td>
-                                    <a href=" {{ route('editCategory', ['category' => $category->id]) }} " role="button">
-                                        Edit
+                                    <a href=" {{ route('editCategory', ['category' => $category->id]) }} " class="btn btn-edit btn-small" role="button">
+                                        <img src=" {{ asset('images/svg/edit-solid.svg') }} " class="btn-image">
                                     </a>
                                 </td>
                             </tr>

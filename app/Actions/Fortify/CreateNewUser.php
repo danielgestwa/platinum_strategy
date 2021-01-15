@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use App\Models\Category;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -27,10 +28,36 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
 
-        return User::create([
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
+        $categories = [
+            'Home',
+            'Communication',
+            'Gifts',
+            'Toiletries',
+            'Bills',
+            'Restaurant',
+            'Entertainment',
+            'Car',
+            'Sport',
+            'Taxi',
+            'Transport',
+            'Clothes',
+            'Animals',
+            'Food'
+        ];
+
+        foreach($categories as $category) {
+            Category::create([
+                'name' => $category,
+                'user_id' => $user->id
+            ]);
+        }
+
+        return $user;
     }
 }

@@ -9,16 +9,23 @@
         <div class="max-w-12xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-12">
 
-                @if (isset($categoryValue->id))
+                @if (isset($categoryValue->id) && $categoryValue->products->isEmpty())
                 <div class="overflow-auto py-4">
+                    <a id="show_{{ $categoryValue->id }}" class="btn btn-delete btn-small show_delete_button float-right" role="button">
+                        <img src=" {{ asset('images/svg/put-trash-solid.svg') }} " class="btn-image">
+                    </a>
                     <form id="delete_{{ $categoryValue->id }}" class="btn btn-delete btn-small float-right delete_table_row" action="{{ route('deleteCategory', ['category' => $categoryValue->id]) }}" method="POST">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="reset-full-width">
-                            Delete
+                            <img src=" {{ asset('images/svg/trash-solid.svg') }} " class="btn-image">
                         </button>
                     </form>
                 </div>
+                @elseif (isset($categoryValue->id) && $categoryValue->products->isNotEmpty())
+                    <div class="m-3 text-gray-400 text-right">
+                        <span>Note: If you want to delete this category, please remove all connected products.</span>
+                    </div>
                 @endif
                 
                 <div class="mt-5 md:mt-0 md:col-span-2">
@@ -34,8 +41,8 @@
                         @csrf
                         <div class="shadow overflow-hidden md:rounded-md">
                             <div class="px-4 py-5 bg-white md:p-6">
-                                <div class="grid grid-cols-6 md:grid-cols-12 gap-6">
-                                    <div class="col-span-6 md:col-span-3">
+                                <div class="grid grid-cols-6 md:grid-cols-12 lg:grid-cols-12 gap-6">
+                                    <div class="col-span-6 md:col-span-6 lg:col-span-4">
                                         <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                                         <input 
                                             type="text" id="name" 

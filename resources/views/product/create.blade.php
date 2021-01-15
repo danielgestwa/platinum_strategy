@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Create/Update product
+            Create/Update expense
         </h2>
     </x-slot>
 
@@ -11,17 +11,20 @@
 
                 @if (isset($productValue->id))
                 <div class="overflow-auto py-4">
+                    <a id="show_{{ $productValue->id }}" class="btn btn-delete btn-small show_delete_button float-right" role="button">
+                        <img src=" {{ asset('images/svg/put-trash-solid.svg') }} " class="btn-image">
+                    </a>
                     <form id="delete_{{ $productValue->id }}" class="btn btn-delete btn-small float-right delete_table_row" action="{{ route('deleteProduct', ['product' => $productValue->id]) }}" method="POST">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="reset-full-width">
-                            Delete
+                            <img src=" {{ asset('images/svg/trash-solid.svg') }} " class="btn-image">
                         </button>
                     </form>
                 </div>
                 @endif
                 
-                <div class="mt-5 md:mt-0 md:col-span-2">
+                <div class="mt-5 md:mt-0 md:col-span-5">
 
                     @if (isset($productValue->id))
                         <form action="{{ route('updateProduct', ['product' => $productValue->id]) }}" method="POST">
@@ -34,9 +37,9 @@
                         @csrf
                         <div class="shadow overflow-hidden md:rounded-md">
                             <div class="px-4 py-5 bg-white md:p-6">
-                                <div class="grid grid-cols-6 md:grid-cols-12 gap-6">
+                                <div class="grid grid-cols-6 md:grid-cols-10 lg:grid-cols-12 gap-6">
 
-                                    <div class="col-span-6 md:col-span-3">
+                                    <div class="col-span-6 md:col-span-5 lg:col-span-4">
                                         <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                                         <input 
                                             type="text" id="name" 
@@ -50,7 +53,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="col-span-6 md:col-span-3">
+                                    <div class="col-span-6 md:col-span-5 lg:col-span-4">
                                         <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
 
                                         <select 
@@ -71,7 +74,7 @@
 
                                     </div>
 
-                                    <div class="col-span-6 md:col-span-3">
+                                    <div class="col-span-6 md:col-span-5 lg:col-span-4">
                                         <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
                                         <input 
                                             type="number" id="price" 
@@ -86,7 +89,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="col-span-6 md:col-span-3">
+                                    <div class="col-span-6 md:col-span-5 lg:col-span-4">
                                         <label for="bought_at" class="block text-sm font-medium text-gray-700">Bought At</label>
                                         <input 
                                             type="text" id="bought_at" 
@@ -100,13 +103,14 @@
                                         @enderror
                                     </div>
 
-                                    <div class="col-span-6 md:col-span-3">
+                                    <div class="col-span-6 md:col-span-5 lg:col-span-4">
                                         <label for="comment" class="block text-sm font-medium text-gray-700">Comment</label>
                                         <input 
                                             type="text" id="comment" 
                                             value="{{ $productValue->comment ?? '' }}" 
                                             name="comment" 
-                                            placeholder="e.g. Sandwich with bacon and smoked ham">
+                                            placeholder="e.g. Sandwich with bacon and smoked ham"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                     </div>
 
                                 </div>

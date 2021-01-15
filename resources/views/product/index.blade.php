@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Products list
+            Expenses list
         </h2>
     </x-slot>
 
@@ -9,13 +9,13 @@
         <div class="max-w-12xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-12">
                 <div class="py-4">
-                    <a href="{{ route('createProduct') }}" class="btn btn-add">Create new product</a>
+                    <a href="{{ route('createProduct') }}" class="btn btn-add">Create new Expense</a>
                 </div>
                 <div class="wait text-center">
                     <p>Loading data, please wait...</p>
                 </div>
                 <div class="hide">
-                    <table id="data_table" class="display barcode">
+                    <table id="data_table" class="display">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -35,8 +35,8 @@
                                 <td>{{ $product->bought_at }}</td>
                                 <td>{{ $product->comment }}</td>
                                 <td>
-                                    <a href=" {{ route('editProduct', ['product' => $product->id]) }} " role="button">
-                                        Edit
+                                    <a href=" {{ route('editProduct', ['product' => $product->id]) }} " class="btn btn-edit btn-small" role="button">
+                                        <img src=" {{ asset('images/svg/edit-solid.svg') }} " class="btn-image">
                                     </a>
                                 </td>
                             </tr>

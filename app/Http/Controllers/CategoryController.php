@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Auth;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -11,7 +13,7 @@ class CategoryController extends Controller
     {
         return view(
             'category.index', 
-            ['categories' => Category::orderBy('name')->get()]
+            ['categories' => Auth::user()->categories()->orderBy('id', 'desc')->get()]
         );
     }
 
@@ -34,9 +36,16 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $categoryData = $request->validate([
-            'name' => 'required|max:100'
+            'name' => [
+                'required',
+                'max:100',
+                Rule::unique('categories', 'name')->where(function ($query) {
+                    $query->where('user_id', Auth::user()->id);
+                }),
+            ]
         ]);
 
+        $categoryData['user_id'] = Auth::user()->id;
         $category = Category::create($categoryData);
         return redirect('categories');
     }
@@ -49,7 +58,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::where('id', $id)->first();
+        $category = Auth::user()->categories()->where('id', $id)->first();
 
         if(empty($category)) {
             return response()->json(['message' => 'Category not found']);
@@ -65,7 +74,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::where('id', $id)->firstOrFail();
+        $category = Auth::user()->categories()->where('id', $id)->firstOrFail();
         return view('category.create', ['categoryValue' => $category]);
     }
 
@@ -79,9 +88,15 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $categoryData = $request->validate([
-            'name' => 'required|max:100'
+            'name' => [
+                'required',
+                'max:100',
+                Rule::unique('categories', 'name')->ignore($id)->where(function ($query) {
+                    $query->where('user_id', Auth::user()->id);
+                })
+            ]
         ]);
-        $category = Category::findOrFail($id);
+        $category = Auth::user()->categories()->findOrFail($id);
         $category->update($categoryData);
         
         return redirect('categories');
@@ -95,8 +110,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
+        $category = Auth::user()->categories()->findOrFail($id);
+        if($category->products->isEmpty()) {
+            $category->delete();
+        }
 
         return redirect('categories');
     }

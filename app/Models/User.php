@@ -9,6 +9,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Product;
+use App\Models\Category;
+use DateTime;
 
 class User extends Authenticatable
 {
@@ -58,4 +61,22 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function products() {
+        return $this->hasMany(Product::class);
+    }
+
+    public function categories() {
+        return $this->hasMany(Category::class);
+    }
+
+    public function report() {
+        $report = [];
+        foreach($this->products()->orderBy('bought_at', 'desc')->orderBy('category_id')->get() as $product) {
+            $currentDate = new DateTime($product->bought_at);
+            $currentCategory = $product->category->name;
+            $report[$currentDate->format('F Y')][$currentCategory][] = $product->price;
+        }
+        return $report;
+    }
 }

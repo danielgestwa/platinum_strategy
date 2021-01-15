@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', ['report' => Auth::user()->report()]);
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])
@@ -51,4 +52,16 @@ Route::middleware(['auth:sanctum', 'verified'])
     ])
     ->except([
         'show'
+    ]);
+
+Route::middleware(['auth:sanctum', 'verified'])
+    ->resource('contact', ContactController::class, [
+        'names' => [
+            'index' => 'contact',
+            'store' => 'sendEmail'
+        ]
+    ])
+    ->only([
+        'index',
+        'store'
     ]);

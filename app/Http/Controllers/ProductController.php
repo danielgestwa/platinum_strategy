@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\Category;
+use App\Models\User;
+use Auth;
 
 class ProductController extends Controller
 {
@@ -12,7 +13,7 @@ class ProductController extends Controller
     {
         return view(
             'product.index', 
-            ['products' => Product::orderBy('bought_at', 'desc')->get()]
+            ['products' => Auth::user()->products()->orderBy('bought_at', 'desc')->get()]
         );
     }
 
@@ -23,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.create', ['categories' => Category::all()]);
+        return view('product.create', ['categories' => Auth::user()->categories()->get()]);
     }
 
     /**
@@ -42,7 +43,9 @@ class ProductController extends Controller
             'bought_at' => 'required|date'
         ]);
 
-        $product = Product::create($productData);
+        $productData['user_id'] = Auth::user()->id;
+        Product::create($productData);
+
         return redirect('products');
     }
 
@@ -54,7 +57,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::where('id', $id)->first();
+        $product = Auth::user()->products()->where('id', $id)->first();
 
         if(empty($product)) {
             return response()->json(['message' => 'Product not found']);
@@ -70,12 +73,12 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::where('id', $id)->firstOrFail();
+        $product = Auth::user()->products()->where('id', $id)->firstOrFail();
         return view(
             'product.create', 
             [
                 'productValue' => $product,
-                'categories' => Category::all()
+                'categories' => Auth::user()->categories()->get()
             ]
         );
     }
@@ -96,7 +99,7 @@ class ProductController extends Controller
             'comment' => 'max:255',
             'bought_at' => 'required|date'
         ]);
-        $product = Product::findOrFail($id);
+        $product = Auth::user()->products()->findOrFail($id);
         $product->update($productData);
         
         return redirect('products');
@@ -110,7 +113,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
+        $product = Auth::user()->products()->findOrFail($id);
         $product->delete();
 
         return redirect('products');

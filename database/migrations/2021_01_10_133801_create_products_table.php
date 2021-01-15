@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price', 8, 2);
             $table->string('comment', 255)->nullable();
             $table->date('bought_at');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }
