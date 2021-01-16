@@ -5,16 +5,16 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-6">
         <div class="max-w-12xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-12">
 
                 @if (isset($productValue->id))
                 <div class="overflow-auto py-4">
-                    <a id="show_{{ $productValue->id }}" class="btn btn-delete btn-small show_delete_button float-right" role="button">
+                    <a id="show_{{ $productValue->id }}" class="btn btn-size btn-delete btn-small show_delete_button float-right" role="button">
                         <img src=" {{ asset('images/svg/put-trash-solid.svg') }} " class="btn-image">
                     </a>
-                    <form id="delete_{{ $productValue->id }}" class="btn btn-delete btn-small float-right delete_table_row" action="{{ route('deleteProduct', ['product' => $productValue->id]) }}" method="POST">
+                    <form id="delete_{{ $productValue->id }}" class="btn btn-size btn-delete btn-small float-right delete_table_row" action="{{ route('deleteProduct', ['product' => $productValue->id]) }}" method="POST">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="reset-full-width">
@@ -40,7 +40,7 @@
                                 <div class="grid grid-cols-6 md:grid-cols-10 lg:grid-cols-12 gap-6">
 
                                     <div class="col-span-6 md:col-span-5 lg:col-span-4">
-                                        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                                        <label for="name" class="block text-sm font-medium text-gray-700">Name *</label>
                                         <input 
                                             type="text" id="name" 
                                             value="{{ $productValue->name ?? '' }}" 
@@ -54,7 +54,7 @@
                                     </div>
 
                                     <div class="col-span-6 md:col-span-5 lg:col-span-4">
-                                        <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                                        <label for="category" class="block text-sm font-medium text-gray-700">Category *</label>
 
                                         <select 
                                             id="category_id" 
@@ -75,7 +75,7 @@
                                     </div>
 
                                     <div class="col-span-6 md:col-span-5 lg:col-span-4">
-                                        <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+                                        <label for="price" class="block text-sm font-medium text-gray-700">Price *</label>
                                         <input 
                                             type="number" id="price" 
                                             value="{{ $productValue->price ?? '' }}" 
@@ -90,7 +90,7 @@
                                     </div>
 
                                     <div class="col-span-6 md:col-span-5 lg:col-span-4">
-                                        <label for="bought_at" class="block text-sm font-medium text-gray-700">Bought At</label>
+                                        <label for="bought_at" class="block text-sm font-medium text-gray-700">Bought At *</label>
                                         <input 
                                             type="text" id="bought_at" 
                                             value="{{ $productValue->bought_at ?? date('Y-m-d') }}" 

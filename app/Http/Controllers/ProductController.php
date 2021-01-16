@@ -9,6 +9,14 @@ use Auth;
 
 class ProductController extends Controller
 {
+    /**
+     * Products (Expenses) for User
+     */
+
+    /**
+     * Show all user products
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         return view(
@@ -47,22 +55,6 @@ class ProductController extends Controller
         Product::create($productData);
 
         return redirect('products');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $product = Auth::user()->products()->where('id', $id)->first();
-
-        if(empty($product)) {
-            return response()->json(['message' => 'Product not found']);
-        }
-        return $product->toJson(JSON_PRETTY_PRINT);
     }
 
     /**

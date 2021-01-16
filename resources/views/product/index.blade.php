@@ -5,11 +5,11 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-6">
         <div class="max-w-12xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-12">
                 <div class="py-4">
-                    <a href="{{ route('createProduct') }}" class="btn btn-add">Create new Expense</a>
+                    <a href="{{ route('createProduct') }}" class="btn btn-size btn-add">Create new Expense</a>
                 </div>
                 <div class="wait text-center">
                     <p>Loading data, please wait...</p>
@@ -35,7 +35,7 @@
                                 <td>{{ $product->bought_at }}</td>
                                 <td>{{ $product->comment }}</td>
                                 <td>
-                                    <a href=" {{ route('editProduct', ['product' => $product->id]) }} " class="btn btn-edit btn-small" role="button">
+                                    <a href=" {{ route('editProduct', ['product' => $product->id]) }} " class="btn btn-size btn-edit btn-small" role="button">
                                         <img src=" {{ asset('images/svg/edit-solid.svg') }} " class="btn-image">
                                     </a>
                                 </td>

@@ -9,13 +9,21 @@ use Auth;
 
 class ContactController extends Controller
 {
+    /**
+     * Controller for sending email message
+     */
+
+    /**
+     * Show contact form with message
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         return view('contact.index');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Validate message and send e-mail to registered user
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

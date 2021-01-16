@@ -3868,14 +3868,20 @@ jQuery(function () {
     reloadDeleteButtons();
   });
   reloadDeleteButtons();
+  $('.show-products').on('click', function () {
+    $('#view_report_' + getId($(this))).toggle();
+  });
 });
 
 function reloadDeleteButtons() {
   $('.show_delete_button').on('click', function () {
     $(this).hide();
-    var item_id = $(this).attr('id').split("_").pop();
-    $('#delete_' + item_id).show();
+    $('#delete_' + getId($(this))).show();
   });
+}
+
+function getId(item) {
+  return item.attr('id').split("_").pop();
 }
 
 /***/ }),

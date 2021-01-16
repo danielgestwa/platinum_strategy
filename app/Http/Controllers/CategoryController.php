@@ -9,6 +9,14 @@ use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
+    /**
+     * Categories. Each Product (Expense) belongs to a Category
+     */
+
+    /**
+     * Show list of categories
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         return view(
@@ -18,7 +26,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating new category.
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,7 +36,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created category in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -51,23 +59,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $category = Auth::user()->categories()->where('id', $id)->first();
-
-        if(empty($category)) {
-            return response()->json(['message' => 'Category not found']);
-        }
-        return $category->toJson(JSON_PRETTY_PRINT);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified cateogry.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -79,7 +71,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified category in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -103,7 +95,8 @@ class CategoryController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified category from storage.
+     * Category could be only deleted if is not connected to any product
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

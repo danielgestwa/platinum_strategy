@@ -2,16 +2,24 @@ body {
     table-layout: fixed;
 }
 
+.hide {
+    display: none;
+}
+
 .btn {
-    padding: 8px;
-    border-radius: 5px;
     color: white;
     display: inline-block;
+    cursor: pointer;
 }
 
 .btn-small {
     width: 48px;
     height: 48px;
+}
+
+.btn-size {
+    padding: 12px;
+    border-radius: 5px;
 }
 
 .btn-image {
@@ -28,12 +36,16 @@ body {
     background-color: #33B5E5;
 }
 
-.btn-delete {
-    background-color: #ff4444;
+.btn-warning {
+    background-color: #FFBB33;
 }
 
-.hide {
-    display: none;
+.btn-purple {
+    background-color: #AA66CC;
+}
+
+.btn-delete {
+    background-color: #ff4444;
 }
 
 .error_text {

@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-6">
         <div class="max-w-12xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-12">
                 
@@ -28,7 +28,7 @@
 
                                 <div class="grid grid-cols-6 lg:grid-cols-12 my-6">
                                     <div class="row col-span-6 lg:col-span-6">
-                                        <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                                        <label for="message" class="block text-sm font-medium text-gray-700">Message *</label>
                                         <textarea 
                                             id="message" 
                                             name="message" 

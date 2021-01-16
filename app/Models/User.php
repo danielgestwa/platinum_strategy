@@ -62,21 +62,55 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    /**
+     * Get query builder for every product that belongs to this user
+     * @return Illuminate\Database\Eloquent\Model
+     */
     public function products() {
         return $this->hasMany(Product::class);
     }
 
+    /**
+     * Get query builder for every category that belongs to this user
+     * @return Illuminate\Database\Eloquent\Model
+     */
     public function categories() {
         return $this->hasMany(Category::class);
     }
 
+    /**
+     * Calculate data for dashboard.
+     * Data is grouped by year_month, category, product
+     * @return array
+     */
     public function report() {
         $report = [];
-        foreach($this->products()->orderBy('bought_at', 'desc')->orderBy('category_id')->get() as $product) {
-            $currentDate = new DateTime($product->bought_at);
-            $currentCategory = $product->category->name;
-            $report[$currentDate->format('F Y')][$currentCategory][] = $product->price;
+        
+        foreach($this->products()->orderBy('bought_at', 'desc')->orderBy('category_id')->orderBy('bought_at', 'desc')->get() as $product) {
+            $productDate = (new DateTime($product->bought_at))->format('F Y');
+            $productCategory = $product->category->name;
+            $report[$productDate]['categories'][$productCategory]['products'][] = $product;
+
+            if(!isset($report[$productDate]['categories'][$productCategory]['price'])) {
+                $report[$productDate]['categories'][$productCategory]['price'] = 0;
+            }
+            $report[$productDate]['categories'][$productCategory]['price'] += $product->price;
+
+            if(!isset($report[$productDate]['sum'])) {
+                $report[$productDate]['sum'] = 0;
+            }
+            $report[$productDate]['sum'] += $product->price;
         }
+
+        $monthCategoryId = 0;
+        foreach($report as $reportDate => $reportCategories) {
+            foreach($reportCategories['categories'] as $category => $productsData) {
+                $report[$reportDate]['categories'][$category]['percentage'] = round($report[$reportDate]['categories'][$category]['price'] * 100 / $report[$productDate]['sum']);
+                $report[$reportDate]['categories'][$category]['id'] = $monthCategoryId;
+                $monthCategoryId += 1;
+            }
+        }
+
         return $report;
     }
 }
