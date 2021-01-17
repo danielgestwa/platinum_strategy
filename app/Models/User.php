@@ -105,7 +105,7 @@ class User extends Authenticatable
         $monthCategoryId = 0;
         foreach($report as $reportDate => $reportCategories) {
             foreach($reportCategories['categories'] as $category => $productsData) {
-                $report[$reportDate]['categories'][$category]['percentage'] = round($report[$reportDate]['categories'][$category]['price'] * 100 / $report[$productDate]['sum']);
+                $report[$reportDate]['categories'][$category]['percentage'] = round($report[$reportDate]['categories'][$category]['price'] * 100 / $report[$reportDate]['sum']);
                 $report[$reportDate]['categories'][$category]['id'] = $monthCategoryId;
                 $monthCategoryId += 1;
             }

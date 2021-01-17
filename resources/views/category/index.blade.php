@@ -9,7 +9,7 @@
         <div class="max-w-12xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-12">
                 <div class="py-4">
-                    <a href="{{ route('createCategory') }}" class="btn btn-size btn-purple">Create new Category</a>
+                    <a href="{{ route('createCategory') }}" class="btn btn-size btn-info">Create new Category</a>
                 </div>
                 <div class="wait text-center">
                     <p>Loading data, please wait...</p>

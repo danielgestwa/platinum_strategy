@@ -5,16 +5,16 @@
         </h2>
     </x-slot>
 
-    <div class="py-6">
+    <div class="py-2">
         <div class="max-w-12xl mx-auto py-2 sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-12">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                     {{ __('Shortcuts') }}
                 </h2>
-                <div class="py-6">
-                    <a href="{{ route('createProduct') }}" class="btn btn-size btn-add m-2">Create new Expense</a>
-                    <a href="{{ route('createCategory') }}" class="btn btn-size btn-purple m-2">Create new Category</a>
-                    <a href="{{ route('contact') }}" class="btn btn-size btn-edit m-2">Contact</a>
+                <div class="py-2 font-bold">
+                    <a href="{{ route('createProduct') }}" class="btn btn-large btn-add m-2">Create new Expense</a>
+                    <a href="{{ route('createCategory') }}" class="btn btn-large btn-info m-2">Create new Category</a>
+                    <a href="{{ route('contact') }}" class="btn btn-large btn-edit m-2">Contact</a>
                 </div>
             </div>
         </div>
@@ -39,9 +39,9 @@
                                 @foreach($categories['categories'] as $category => $products)
                                     <tr>
                                         <td>{{ $category }}</td>
-                                        <td>{{ $products['price'] }}</td>
+                                        <td>{{ number_format($products['price'], 2, '.', '') }}</td>
                                         <td>{{ $products['percentage'] }}%</td>
-                                        <td><button id="btn_report_{{ $products['id'] }}" class="show-products text-sm btn-purple text-white rounded-md px-2 p-1 m-1">More</button></td>
+                                        <td><button id="btn_report_{{ $products['id'] }}" class="show-products text-sm bg-indigo-500 text-white rounded-md px-2 p-1 m-1">More</button></td>
                                     </tr>
                                     <tr>
                                         <td colspan="100%" class="bg-gray-50">
@@ -72,7 +72,7 @@
                         </table>
                     </div>
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                        Expenses total: <span class="font-bold underline">{{ $categories['sum'] }}</span>
+                        Total Expenses: <span class="font-bold underline">{{ number_format($categories['sum'], 2, '.', '') }}</span>
                     </h2>
                 </div>
             </div>

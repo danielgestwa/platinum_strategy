@@ -22,6 +22,11 @@ body {
     border-radius: 5px;
 }
 
+.btn-large {
+    padding: 24px;
+    border-radius: 10px;
+}
+
 .btn-image {
     width: 24px;
     height: 100%;
@@ -40,8 +45,8 @@ body {
     background-color: #FFBB33;
 }
 
-.btn-purple {
-    background-color: #AA66CC;
+.btn-info {
+    background-color: #4285F4;
 }
 
 .btn-delete {
