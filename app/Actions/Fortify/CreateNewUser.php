@@ -33,30 +33,7 @@ class CreateNewUser implements CreatesNewUsers
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
-
-        $categories = [
-            'Home',
-            'Communication',
-            'Gifts',
-            'Toiletries',
-            'Bills',
-            'Restaurant',
-            'Entertainment',
-            'Car',
-            'Sport',
-            'Taxi',
-            'Transport',
-            'Clothes',
-            'Animals',
-            'Food'
-        ];
-
-        foreach($categories as $category) {
-            Category::create([
-                'name' => $category,
-                'user_id' => $user->id
-            ]);
-        }
+        $user->createDefaultCategories();
 
         return $user;
     }

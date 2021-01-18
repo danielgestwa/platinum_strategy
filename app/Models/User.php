@@ -79,6 +79,35 @@ class User extends Authenticatable
     }
 
     /**
+     * Use this function right after user create, to give him default categories
+     */
+    public function createDefaultCategories() {
+        $categories = [
+            'Home',
+            'Communication',
+            'Gifts',
+            'Toiletries',
+            'Bills',
+            'Restaurant',
+            'Entertainment',
+            'Car',
+            'Sport',
+            'Taxi',
+            'Transport',
+            'Clothes',
+            'Animals',
+            'Food'
+        ];
+
+        foreach($categories as $category) {
+            Category::create([
+                'name' => $category,
+                'user_id' => $this->id
+            ]);
+        }
+    }
+
+    /**
      * Calculate data for dashboard.
      * Data is grouped by year_month, category, product
      * @return array
