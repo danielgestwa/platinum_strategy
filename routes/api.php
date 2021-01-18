@@ -19,11 +19,7 @@ use App\Http\Controllers\Api\TokenController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::resource('token', TokenController::class, [
-        'names' => [
-            'store' => 'token'
-        ]
-    ])
+Route::resource('token', TokenController::class)
     ->only([
         'store'
     ]);

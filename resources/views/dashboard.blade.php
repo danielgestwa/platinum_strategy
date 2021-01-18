@@ -21,12 +21,12 @@
 
         @foreach($report as $year_month => $categories)
             <div class="max-w-12xl mx-auto py-2 sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-12">
-                    <h2 class="font-bold text-xl text-gray-800 leading-tight">
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-2">
+                    <h2 class="font-bold text-xl text-gray-800 leading-tight px-6 pt-6">
                         {{ $year_month }}
                     </h2>
                     <div class="my-2">
-                        <table class="sm:w-full md:w-3/5 m-auto">
+                        <table class="sm:w-full md:text-md md:w-3/5 m-auto">
                             <thead>
                                 <tr>
                                     <th>Category name</th>
@@ -38,14 +38,14 @@
                             <tbody class="text-center">
                                 @foreach($categories['categories'] as $category => $products)
                                     <tr>
-                                        <td>{{ $category }}</td>
+                                        <td>{{ Str::limit($category, 15) }}</td>
                                         <td>{{ number_format($products['price'], 2, '.', '') }}</td>
                                         <td>{{ $products['percentage'] }}%</td>
                                         <td><button id="btn_report_{{ $products['id'] }}" class="show-products text-sm bg-indigo-500 text-white rounded-md px-2 p-1 m-1">More</button></td>
                                     </tr>
                                     <tr>
                                         <td colspan="100%" class="bg-gray-50">
-                                            <table id="view_report_{{ $products['id'] }}" class="w-full table-fixed text-sm italic hidden">
+                                            <table id="view_report_{{ $products['id'] }}" class="w-full text-sm italic hidden">
                                                 <thead>
                                                     <tr>
                                                         <th>Name</th>
@@ -57,9 +57,9 @@
                                                 <tbody>
                                                     @foreach($products['products'] as $product)
                                                         <tr>
-                                                            <td>{{ $product->name }}</td>
+                                                            <td>{{ Str::limit($product->name, 30) }}</td>
                                                             <td>{{ $product->price }}</td>
-                                                            <td>{{ $product->comment }}</td>
+                                                            <td>{{ Str::limit($product->comment, 30) }}</td>
                                                             <td><a href=" {{ route('editProduct', ['product' => $product->id]) }} " class="text-md btn btn-edit text-white rounded-md px-2 p-1 m-1">Edit</a></td>
                                                         </tr>
                                                     @endforeach
@@ -71,7 +71,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    <h2 class="font-semibold text-xl text-gray-800 leading-tight px-6 pb-6">
                         Total Expenses: <span class="font-bold underline">{{ number_format($categories['sum'], 2, '.', '') }}</span>
                     </h2>
                 </div>

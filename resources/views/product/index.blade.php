@@ -21,7 +21,7 @@
                                 <th>Name</th>
                                 <th>Category</th>
                                 <th>Price</th>
-                                <th>Bought At</th>
+                                <th>Bought On</th>
                                 <th>Comment</th>
                                 <th>Action</th>
                             </tr>

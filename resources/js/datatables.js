@@ -12,22 +12,15 @@ jQuery(function() {
         table.responsive.recalc();
     });
 
-    table.on('draw.dt, click', function() {
-        reloadDeleteButtons();
-    })
-    reloadDeleteButtons();
-
     $('.show-products').on('click', function() {
         $('#view_report_' + getId($(this))).toggle()
     })
-})
 
-function reloadDeleteButtons() {
     $('.show_delete_button').on('click', function() {
         $(this).hide()
         $('#delete_' + getId($(this))).show()
     })
-}
+})
 
 function getId(item) {
     return item.attr('id').split("_").pop()

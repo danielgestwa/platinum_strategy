@@ -90,7 +90,7 @@
                                     </div>
 
                                     <div class="col-span-6 md:col-span-5 lg:col-span-4">
-                                        <label for="bought_at" class="block text-sm font-medium text-gray-700">Bought At *</label>
+                                        <label for="bought_at" class="block text-sm font-medium text-gray-700">Bought On *</label>
                                         <input 
                                             type="text" id="bought_at" 
                                             value="{{ $productValue->bought_at ?? date('Y-m-d') }}" 
