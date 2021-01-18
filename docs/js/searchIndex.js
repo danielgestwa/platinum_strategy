@@ -416,6 +416,11 @@ Search.appendIndex(
             "summary": "Get\u0020query\u0020builder\u0020for\u0020every\u0020category\u0020that\u0020belongs\u0020to\u0020this\u0020user",
             "url": "classes/App-Models-User.html#method_categories"
         },                {
+            "fqsen": "\\App\\Models\\User\u003A\u003AcreateDefaultCategories\u0028\u0029",
+            "name": "createDefaultCategories",
+            "summary": "Use\u0020this\u0020function\u0020right\u0020after\u0020user\u0020create,\u0020to\u0020give\u0020him\u0020default\u0020categories",
+            "url": "classes/App-Models-User.html#method_createDefaultCategories"
+        },                {
             "fqsen": "\\App\\Models\\User\u003A\u003Areport\u0028\u0029",
             "name": "report",
             "summary": "Calculate\u0020data\u0020for\u0020dashboard.",
